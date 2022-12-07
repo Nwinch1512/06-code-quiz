@@ -8,18 +8,30 @@ let startBtnEl = document.getElementById("start");
 //This is from highscores.html file
 // let highScoresEl = document.getElementById("highscores");
 let timeLeftEl = document.getElementById("time");
+// let questions = getElementById("questions");
+// let choices = getElementById("choices");
+let score = 0;
 
-startBtnEl.addEventListener("click", loadQuestions);
+startBtnEl.addEventListener("click", timerCountdown, loadQuestions);
 
-// Setting up function that starts a time and loads first question
-function loadQuestions() {}
+// Setting up function that loads first question.  Need to figure out where to get questinos from.
+// Questions contain buttons for each answer.
+// When answer is clicked, the next question appears
+// If the answer clicked was incorrect then subtract time from the clock
+// The quiz should end when all questions are answered or the timer reaches 0.
+function loadQuestions() {
+  //load first question
+  //Set up buttons for each choice - looks like there are 4 choices for each question.
+  //Add eventlistener to choice which takes the user to the next question.
+  //Take away time from timeLeftEl each time answer incorrect
+}
 
 function timerCountdown() {
-  let timeLeft = 75;
+  let timeLeft = 5;
   timeLeftEl.textContent = timeLeft;
 
   let setTimer = setInterval(function () {
-    //When 'timeleft is great than 1 second
+    //When timeleft is great than 0 second
     if (timeLeft > 0) {
       //Decrement timeleft down
       timeLeft--;
@@ -27,18 +39,30 @@ function timerCountdown() {
     } else {
       // When timeleft gets to 0, set timeleftel to empty string
       timeLeftEl = "";
+      enterScore();
       //Use clear interval to stop timer
       clearInterval(setTimer);
     }
   }, 1000);
 }
 
-timerCountdown();
+function enterScore() {
+  //End quiz when timer reaches zero if(timeEl===0){end game; display score, let user save initials and their score}
+  let finalScore = prompt(`Your score is ${score}!\nEnter your initials here:`);
+  console.log(finalScore);
+}
 
-// Questions contain buttons for each answer.
-// When answer is clicked, the next question appears
-// If the answer clicked was incorrect then subtract time from the clock
-// The quiz should end when all questions are answered or the timer reaches 0.
+// function checkAnswer() {
+//   let timeLeft = timerCountdown();
+//   if (answer === true) {
+//     score = score + 1;
+//   } else {
+//     score = score - 1;
+//     timeLeft = timeLeft - 20;
+//   }
+// }
+
+function displayScore() {}
 
 // When the game ends, it should display their score and give the user the ability to save their initials and their score
 //NW. Need to use a prompt window to save initials.
