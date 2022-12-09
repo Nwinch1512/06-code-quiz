@@ -11,17 +11,43 @@ let timeLeftEl = document.getElementById("time");
 // let questions = getElementById("questions");
 // let choices = getElementById("choices");
 let score = 0;
+let questions = [
+  {
+    question: "Commonly used data types DO Not Include",
+    answers: ["strings", "boleans", "alerts", "numbers"],
+    correctAnswer: "alerts",
+  },
+  {
+    question:
+      "String values must be enclosed within____ when being assigned to variables",
+    answers: ["commas", "curly brackets", "quotes", "parenthesis"],
+    correctAnswer: "quotes",
+  },
+  {
+    question:
+      "A very useful tool used during development and debugging for printing content to the debugger is:",
+    answers: ["JavaScript", "terminal/bash", "for loops", "console log"],
+    correctAnswer: "console log",
+  },
+];
+
+console.log(questions);
+console.log(questions.length);
 
 startBtnEl.addEventListener("click", timerCountdown, displayQuestions);
 
-// Setting up function that loads first question.  Need to figure out where to get questinos from.
+// Setting up function that loads first question.  Need to figure out where to get questions
 // Questions contain buttons for each answer.
 // When answer is clicked, the next question appears
 // If the answer clicked was incorrect then subtract time from the clock
 // The quiz should end when all questions are answered or the timer reaches 0.
 function displayQuestions() {
-  //load first question
-  //Set up buttons for each choice - looks like there are 4 choices for each question.
+  //load first question.  HTML class set up to show.  Need to add class for hide.
+  // hide each question classlist.add('hide');
+  // for (i=0;i<questions.length;i++)
+  //let currentQuestion = questions[i];
+  // classlist.add('show') for question in array based on array index
+  //Set up buttons for each choice - looks like there are 4 choices for each question. Need to append buttons to heading.
   //Add eventlistener to choice which takes the user to the next question.
   //Take away time from timeLeftEl each time answer incorrect
   let questionCount = 0;
