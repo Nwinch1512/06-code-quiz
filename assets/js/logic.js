@@ -8,33 +8,112 @@ let startBtnEl = document.getElementById("start");
 //This is from highscores.html file
 // let highScoresEl = document.getElementById("highscores");
 let timeLeftEl = document.getElementById("time");
-// let questions = getElementById("questions");
-// let choices = getElementById("choices");
+let questionsDiv = document.getElementById("questions");
+let choices = document.getElementById("choices");
 let score = 0;
+let highScore = 0;
+let finalScoreSpan = document.getElementById("final-score");
 let questions = [
   {
-    question: "Commonly used data types DO Not Include",
-    answers: ["strings", "boleans", "alerts", "numbers"],
-    correctAnswer: "alerts",
+    title: "Commonly used data types DO NOT include:",
+    choices: ["strings", "booleans", "alerts", "numbers"],
+    answer: "alerts",
   },
   {
-    question:
-      "String values must be enclosed within____ when being assigned to variables",
-    answers: ["commas", "curly brackets", "quotes", "parenthesis"],
-    correctAnswer: "quotes",
+    title: "The condition in an if / else statement is enclosed within ____.",
+    choices: ["quotes", "curly brackets", "parentheses", "square brackets"],
+    answer: "parentheses",
   },
   {
-    question:
+    title: "Arrays in JavaScript can be used to store ____.",
+    choices: [
+      "numbers and strings",
+      "other arrays",
+      "booleans",
+      "all of the above",
+    ],
+    answer: "all of the above",
+  },
+  {
+    title:
+      "String values must be enclosed within ____ when being assigned to variables.",
+    choices: ["commas", "curly brackets", "quotes", "parentheses"],
+    answer: "quotes",
+  },
+  {
+    title:
       "A very useful tool used during development and debugging for printing content to the debugger is:",
-    answers: ["JavaScript", "terminal/bash", "for loops", "console log"],
-    correctAnswer: "console log",
+    choices: ["JavaScript", "terminal / bash", "for loops", "console.log"],
+    answer: "console.log",
   },
 ];
 
+// Set up a function that loops over questions array and prints question text out to console
 console.log(questions);
 console.log(questions.length);
-
+let text;
 startBtnEl.addEventListener("click", timerCountdown, displayQuestions);
+
+//Trying out forEach
+// questions.forEach(myFunction);
+// function myFunction(question, index) {
+//   text += index + ": " + question + "<br>";
+//   console.log(text);
+// }
+
+// for (let question of Object.values(questions)) {
+//   console.log(Object.values(question));
+//   let individualQuestion = Object.values(question);
+//   let { question, answer, correctAnswer } = individualQuestion;
+//   console.log(question);
+// }
+
+let firstQuestion = questions[0];
+let questionTitle = document.createElement("h2");
+
+questionTitle.textContent = firstQuestion;
+console.log(firstQuestion);
+console.log(firstQuestion.title);
+
+let firstChoices = questions[0];
+let secondChoices = questions[1];
+let thirdChoices = questions[2];
+let fourthChoices = questions[3];
+
+function displayChoices(choicesArr) {
+  choicesArr.choices.forEach((choice) => {
+    console.log(choice);
+  });
+  return;
+}
+displayChoices(firstChoices);
+displayChoices(secondChoices);
+displayChoices(thirdChoices);
+displayChoices(fourthChoices);
+
+let choicesEntries = Object.entries(questions);
+for (let [key, { title, choices, answer }] of choicesEntries) {
+  let firstChoices = questions[0];
+  console.log(firstChoices.choices);
+  firstChoices.choices.forEach((choice) => {
+    console.log(choice);
+  });
+  console.log(`${key}:${choices}`);
+}
+Object.entries(questions.choices).forEach(([key, value]) => {
+  console.log(key, value);
+});
+
+let questionIndex = 0;
+let questionsEntries = Object.entries(questions);
+for (let [key, { title, choices, answer }] of questionsEntries) {
+  // console.log(`${key}:${title}`);
+  let keyAsInt = parseInt(key);
+  console.log(keyAsInt);
+  if (keyAsInt === questionIndex) {
+    console.log(`${keyAsInt + 1}: ${title}`);
+  }
+}
 
 // Setting up function that loads first question.  Need to figure out where to get questions
 // Questions contain buttons for each answer.
@@ -44,27 +123,40 @@ startBtnEl.addEventListener("click", timerCountdown, displayQuestions);
 function displayQuestions() {
   //load first question.  HTML class set up to show.  Need to add class for hide.
   // hide each question classlist.add('hide');
-  // for (i=0;i<questions.length;i++)
-  //let currentQuestion = questions[i];
-  // classlist.add('show') for question in array based on array index
-  //Set up buttons for each choice - looks like there are 4 choices for each question. Need to append buttons to heading.
-  //Add eventlistener to choice which takes the user to the next question.
-  //Take away time from timeLeftEl each time answer incorrect
-  let questionCount = 0;
-
-  // Uses the `setInterval()` method to call a function to be executed every 1000 milliseconds
-  let questionInterval = setInterval(function () {
-    // If there are no more words left in the message
-    if (questions[questionCount] === undefined) {
-      // Use `clearInterval()` to stop the timer
-      clearInterval(questionInterval);
-    } else {
-      // Display one word of the message
-      questions.textContent = questions[questionCount];
-      questionCount++;
-    }
-  }, 1000);
+  // for (let questionText of Object.keys(questionsText)) {
+  //   // let currentQuestion = questionsText.question[i];
+  //   // let { answers, correctAnswer, question } = currentQuestion;
+  //   console.log(questionText);
 }
+
+// for (i = 0; i < questionsText.length; i++) {
+//   let currentQuestion = questionsText.question[i];
+//   let currentOptions = questionsText.answers[i];
+//   let btnEl = document.createElement("button");
+//   btnEl.dataset.index = i;
+//   currentOptions.appendChild(btnEl);
+//   choices.appendChild(currentOptions);
+//   // btnEl.textContent = `${i + 1}${currentQuestion}`;
+// }
+//let currentQuestion = questions[i];
+// classlist.add('show') for question in array based on array index
+//Set up buttons for each choice - looks like there are 4 choices for each question. Need to append buttons to heading.
+//Add eventlistener to choice which takes the user to the next question.
+//Take away time from timeLeftEl each time answer incorrect
+let questionCount = 0;
+
+// Uses the `setInterval()` method to call a function to be executed every 1000 milliseconds
+let questionInterval = setInterval(function () {
+  // If there are no more words left in the message
+  if (questions[questionCount] === undefined) {
+    // Use `clearInterval()` to stop the timer
+    clearInterval(questionInterval);
+  } else {
+    // Display one word of the message
+    questions.textContent = questions[questionCount];
+    questionCount++;
+  }
+}, 1000);
 
 function timerCountdown() {
   let timeLeft = 5;
@@ -79,7 +171,7 @@ function timerCountdown() {
     } else {
       // When timeleft gets to 0, set timeleftel to empty string
       timeLeftEl = "";
-      enterScore();
+      displayScore();
       //Use clear interval to stop timer
       clearInterval(setTimer);
       //Call displayQuestions function
@@ -88,8 +180,14 @@ function timerCountdown() {
   }, 1000);
 }
 
+//function to check high score
+function checkScore(score, highScore) {
+  if (score > highScore) {
+    highScore = score;
+  } else highScore = highScore;
+}
 // When the game ends, it should display their score and give the user the ability to save their initials and their score
-function enterScore() {
+function displayScore() {
   //End quiz when timer reaches zero if(timeEl===0){end game; display score, let user save initials and their score}
   let finalScore = prompt(`Your score is ${score}!\nEnter your initials here:`);
   console.log(finalScore);
@@ -105,7 +203,7 @@ function enterScore() {
 //   }
 // }
 
-function displayScore() {}
+// function displayScore() {}
 
 // NW. Need to develop high scores section.  Maybe use document.create to create li elements under ol.  Use append child method to append to ol.  Look back at append child activities from week 6 class 1.  Use el.textContent to set value for each score element within loop.  Set up as node list for all high score elements.  Then loop over node list and populate high scores based on min max if logic.  e.g.
 // let currScore = 0; let maxScore = 0; (if currScore > maxScore) {maxScore = currScore}
