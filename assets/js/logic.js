@@ -68,17 +68,21 @@ startBtnEl.addEventListener("click", timerCountdown, displayQuestions);
 //   console.log(question);
 // }
 
-let firstQuestion = questions[0];
 let questionTitle = document.createElement("h2");
 
-questionTitle.textContent = firstQuestion;
-console.log(firstQuestion);
-console.log(firstQuestion.title);
+//Accessing questions from object
+let firstQuestion = questions[0];
+let secondQuestion = questions[1];
+let thirdQuestion = questions[2];
+let fourthQuestion = questions[3];
+let fifthQuestion = questions[4];
 
+//Accessing choices from object
 let firstChoices = questions[0];
 let secondChoices = questions[1];
 let thirdChoices = questions[2];
 let fourthChoices = questions[3];
+let fifthChoices = questions[4];
 
 function displayChoices(choicesArr) {
   choicesArr.choices.forEach((choice) => {
@@ -86,34 +90,47 @@ function displayChoices(choicesArr) {
   });
   return;
 }
+
+questionTitle.textContent = firstQuestion;
+
+// function displayQuestion(questionsArr) {
+//   let firstQuestion = questions[0];
+// }
+
+console.log(firstQuestion.title);
 displayChoices(firstChoices);
+console.log(secondQuestion.title);
 displayChoices(secondChoices);
+console.log(thirdQuestion.title);
 displayChoices(thirdChoices);
+console.log(fourthQuestion.title);
 displayChoices(fourthChoices);
+console.log(fifthQuestion.title);
+displayChoices(fifthChoices);
 
-let choicesEntries = Object.entries(questions);
-for (let [key, { title, choices, answer }] of choicesEntries) {
-  let firstChoices = questions[0];
-  console.log(firstChoices.choices);
-  firstChoices.choices.forEach((choice) => {
-    console.log(choice);
-  });
-  console.log(`${key}:${choices}`);
-}
-Object.entries(questions.choices).forEach(([key, value]) => {
-  console.log(key, value);
-});
+// let choicesEntries = Object.entries(questions);
+// for (let [key, { title, choices, answer }] of choicesEntries) {
+//   let firstChoices = questions[0];
+//   console.log(firstChoices.choices);
+//   firstChoices.choices.forEach((choice) => {
+//     console.log(choice);
+//   });
+//   console.log(`${key}:${choices}`);
+// }
+// Object.entries(questions.choices).forEach(([key, value]) => {
+//   console.log(key, value);
+// });
 
-let questionIndex = 0;
-let questionsEntries = Object.entries(questions);
-for (let [key, { title, choices, answer }] of questionsEntries) {
-  // console.log(`${key}:${title}`);
-  let keyAsInt = parseInt(key);
-  console.log(keyAsInt);
-  if (keyAsInt === questionIndex) {
-    console.log(`${keyAsInt + 1}: ${title}`);
-  }
-}
+// let questionIndex = 0;
+// let questionsEntries = Object.entries(questions);
+// for (let [key, { title, choices, answer }] of questionsEntries) {
+//   // console.log(`${key}:${title}`);
+//   let keyAsInt = parseInt(key);
+//   console.log(keyAsInt);
+//   if (keyAsInt === questionIndex) {
+//     console.log(`${keyAsInt + 1}: ${title}`);
+//   }
+// }
 
 // Setting up function that loads first question.  Need to figure out where to get questions
 // Questions contain buttons for each answer.
