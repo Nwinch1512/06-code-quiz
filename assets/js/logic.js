@@ -68,7 +68,7 @@ startBtnEl.addEventListener("click", timerCountdown, displayQuestions);
 //   console.log(question);
 // }
 
-let questionTitle = document.createElement("h2");
+let questionTitle = document.getElementById("question-title");
 
 //Accessing questions from object
 let firstQuestion = questions[0];
@@ -77,13 +77,6 @@ let thirdQuestion = questions[2];
 let fourthQuestion = questions[3];
 let fifthQuestion = questions[4];
 
-//Accessing choices from object
-let firstChoices = questions[0];
-let secondChoices = questions[1];
-let thirdChoices = questions[2];
-let fourthChoices = questions[3];
-let fifthChoices = questions[4];
-
 function displayChoices(choicesArr) {
   choicesArr.choices.forEach((choice) => {
     console.log(choice);
@@ -91,22 +84,33 @@ function displayChoices(choicesArr) {
   return;
 }
 
-questionTitle.textContent = firstQuestion;
+console.log(firstQuestion.title);
+let firstChoices = displayChoices(questions[0]);
+console.log(secondQuestion.title);
+let secondChoices = displayChoices(questions[1]);
+console.log(thirdQuestion.title);
+let thirdChoices = displayChoices(questions[2]);
+console.log(fourthQuestion.title);
+let fourthChoices = displayChoices(questions[3]);
+console.log(fifthQuestion.title);
+let fifthChoices = displayChoices(questions[4]);
+
+questionTitle.textContent = firstQuestion.title;
+console.log(questions.length);
+
+let question = questions[0];
+
+for (let i = 0; i < question.choices.length; i++) {
+  let choicesBtn = document.createElement("button");
+  choicesBtn.classList.add("button");
+  choicesBtn.textContent = question.choices[i];
+  choicesBtn.dataset.index = i;
+  choices.appendChild(choicesBtn);
+}
 
 // function displayQuestion(questionsArr) {
 //   let firstQuestion = questions[0];
 // }
-
-console.log(firstQuestion.title);
-displayChoices(firstChoices);
-console.log(secondQuestion.title);
-displayChoices(secondChoices);
-console.log(thirdQuestion.title);
-displayChoices(thirdChoices);
-console.log(fourthQuestion.title);
-displayChoices(fourthChoices);
-console.log(fifthQuestion.title);
-displayChoices(fifthChoices);
 
 // let choicesEntries = Object.entries(questions);
 // for (let [key, { title, choices, answer }] of choicesEntries) {
