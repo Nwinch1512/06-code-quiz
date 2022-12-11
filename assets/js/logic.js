@@ -4,8 +4,8 @@
 // A start button that when clicked a timer starts and the first question appears.
 
 // Bringing in HTML as variables to use in JS
-let quizHeading = document.getElementById("start-screen");
-console.log(quizHeading);
+let startScreen = document.getElementById("start-screen");
+let endScreen = document.getElementById("end-screen");
 let startBtnEl = document.getElementById("start");
 //This is from highscores.html file
 // let highScoresEl = document.getElementById("highscores");
@@ -17,13 +17,7 @@ let score = 0;
 let highScore = 0;
 let finalScoreSpan = document.getElementById("final-score");
 let currentQuestionIndex = 0;
-
-// body.addEventListener("onload", resetPage);
-
-// function resetPage() {
-//   questionTitle = "";
-//   choices = "";
-// }
+let timeLeft = 5;
 
 // Set up a function that loops over questions array and prints question text out to console
 console.log(questions);
@@ -79,7 +73,7 @@ console.log(questions.length);
 
 function showQuestions() {
   choices.textContent = "";
-  quizHeading.textContent = "";
+  startScreen.textContent = "";
   let question = questions[currentQuestionIndex];
   console.log(question.title);
   questionTitle.textContent = question.title;
@@ -117,7 +111,7 @@ function submitAnswer(event) {
   let submittedAnswer = question.choices[answerIndex];
   let score = 0;
   console.log(submittedAnswer);
-  //Need to append message to div as per demo and play sound file
+  //Need to append message to div as per demo and play sound file.  Need to remove time from time element if answer wrong.
   if (submittedAnswer == correctAnswer) {
     console.log("You're correct!");
     score += 1;
@@ -208,7 +202,6 @@ let questionInterval = setInterval(function () {
 }, 1000);
 
 function timerCountdown() {
-  let timeLeft = 5;
   timeLeftEl.textContent = timeLeft;
 
   let setTimer = setInterval(function () {
@@ -238,6 +231,11 @@ function checkScore(score, highScore) {
 // When the game ends, it should display their score and give the user the ability to save their initials and their score
 // function displayScore() {
 //   //End quiz when timer reaches zero if(timeEl===0){end game; display score, let user save initials and their score}
+
+// if ((currentQuestionIndex = currentQuestionIndex.length)) {
+//   endScreen.classList.remove("hide");
+//   let initialInput = document.createElement("input");
+// }
 //   let finalScore = prompt(`Your score is ${score}!\nEnter your initials here:`);
 //   console.log(finalScore);
 // }
