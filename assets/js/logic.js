@@ -98,16 +98,36 @@ let fifthChoices = displayChoices(questions[4]);
 questionTitle.textContent = firstQuestion.title;
 console.log(questions.length);
 
-let question = questions[0];
+function showQuestions() {
+  let question = questions[0];
+  let correctAnswer = question.answer;
+  for (let i = 0; i < question.choices.length; i++) {
+    let choicesBtn = document.createElement("button");
+    choicesBtn.classList.add("button");
+    let text = i + 1 + ". " + question.choices[i];
+    choicesBtn.textContent = text;
+    choicesBtn.setAttribute("index", i);
+    choicesBtn.onclick = submitAnswer;
+    choices.appendChild(choicesBtn);
+    console.log(correctAnswer);
+  }
 
-for (let i = 0; i < question.choices.length; i++) {
-  let choicesBtn = document.createElement("button");
-  choicesBtn.classList.add("button");
-  choicesBtn.textContent = question.choices[i];
-  choicesBtn.dataset.index = i;
-  choices.appendChild(choicesBtn);
+  function submitAnswer(event) {
+    let answerIndex = event.target.getAttribute("index");
+    let submittedAnswer = question.choices[answerIndex];
+    console.log(submittedAnswer);
+    if (submittedAnswer == correctAnswer) {
+      console.log("You're correct!");
+    } else {
+      console.log("You're wrong!");
+    }
+  }
+  // calcScore();
 }
 
+// console.log(questions.answer[0]);
+
+showQuestions();
 // function displayQuestion(questionsArr) {
 //   let firstQuestion = questions[0];
 // }
