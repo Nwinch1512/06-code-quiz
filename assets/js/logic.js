@@ -4,55 +4,37 @@
 // A start button that when clicked a timer starts and the first question appears.
 
 // Bringing in HTML as variables to use in JS
+let quizHeading = document.getElementById("start-screen");
+console.log(quizHeading);
 let startBtnEl = document.getElementById("start");
 //This is from highscores.html file
 // let highScoresEl = document.getElementById("highscores");
 let timeLeftEl = document.getElementById("time");
 let questionsDiv = document.getElementById("questions");
+let questionTitle = document.getElementById("question-title");
 let choices = document.getElementById("choices");
 let score = 0;
 let highScore = 0;
 let finalScoreSpan = document.getElementById("final-score");
-let questions = [
-  {
-    title: "Commonly used data types DO NOT include:",
-    choices: ["strings", "booleans", "alerts", "numbers"],
-    answer: "alerts",
-  },
-  {
-    title: "The condition in an if / else statement is enclosed within ____.",
-    choices: ["quotes", "curly brackets", "parentheses", "square brackets"],
-    answer: "parentheses",
-  },
-  {
-    title: "Arrays in JavaScript can be used to store ____.",
-    choices: [
-      "numbers and strings",
-      "other arrays",
-      "booleans",
-      "all of the above",
-    ],
-    answer: "all of the above",
-  },
-  {
-    title:
-      "String values must be enclosed within ____ when being assigned to variables.",
-    choices: ["commas", "curly brackets", "quotes", "parentheses"],
-    answer: "quotes",
-  },
-  {
-    title:
-      "A very useful tool used during development and debugging for printing content to the debugger is:",
-    choices: ["JavaScript", "terminal / bash", "for loops", "console.log"],
-    answer: "console.log",
-  },
-];
+let currentQuestionIndex = 0;
+
+// body.addEventListener("onload", resetPage);
+
+// function resetPage() {
+//   questionTitle = "";
+//   choices = "";
+// }
 
 // Set up a function that loops over questions array and prints question text out to console
 console.log(questions);
 console.log(questions.length);
 let text;
-startBtnEl.addEventListener("click", timerCountdown, displayQuestions);
+startBtnEl.addEventListener("click", startQuiz);
+
+function startQuiz() {
+  timerCountdown();
+  showQuestions();
+}
 
 //Trying out forEach
 // questions.forEach(myFunction);
@@ -67,8 +49,6 @@ startBtnEl.addEventListener("click", timerCountdown, displayQuestions);
 //   let { question, answer, correctAnswer } = individualQuestion;
 //   console.log(question);
 // }
-
-let questionTitle = document.getElementById("question-title");
 
 //Accessing questions from object
 let firstQuestion = questions[0];
@@ -95,15 +75,18 @@ let fourthChoices = displayChoices(questions[3]);
 console.log(fifthQuestion.title);
 let fifthChoices = displayChoices(questions[4]);
 
-questionTitle.textContent = firstQuestion.title;
 console.log(questions.length);
 
 function showQuestions() {
-  let question = questions[0];
+  choices.textContent = "";
+  quizHeading.textContent = "";
+  let question = questions[currentQuestionIndex];
+  console.log(question.title);
+  questionTitle.textContent = question.title;
   let correctAnswer = question.answer;
   for (let i = 0; i < question.choices.length; i++) {
     let choicesBtn = document.createElement("button");
-    choicesBtn.classList.add("button");
+    choicesBtn.classList.add("choices-button");
     let text = i + 1 + ". " + question.choices[i];
     choicesBtn.textContent = text;
     choicesBtn.setAttribute("index", i);
@@ -111,23 +94,48 @@ function showQuestions() {
     choices.appendChild(choicesBtn);
     console.log(correctAnswer);
   }
-
-  function submitAnswer(event) {
-    let answerIndex = event.target.getAttribute("index");
-    let submittedAnswer = question.choices[answerIndex];
-    console.log(submittedAnswer);
-    if (submittedAnswer == correctAnswer) {
-      console.log("You're correct!");
-    } else {
-      console.log("You're wrong!");
-    }
-  }
-  // calcScore();
 }
+
+// function removeBtns(event) {
+//   questions[currentQuestionIndex].splice(event.target.getAttribute("index"), 1);
+// }
+
+// function resetQuestions(event) {
+//   let choicesBtn = documentQuerySelectorAll("choices-button");
+//   for (let i = 0; i < question.choices.length; i++) {
+//     let text = i + 1 + ". " + question.choices[i];
+//     choicesBtn.textContent = text;
+//   }
+// }
+
+function submitAnswer(event) {
+  localStorage.getItem("choicesBtn");
+  let question = questions[currentQuestionIndex];
+  let correctAnswer = question.answer;
+  let answerIndex = event.target.getAttribute("index");
+  console.log(answerIndex);
+  let submittedAnswer = question.choices[answerIndex];
+  let score = 0;
+  console.log(submittedAnswer);
+  //Need to append message to div as per demo and play sound file
+  if (submittedAnswer == correctAnswer) {
+    console.log("You're correct!");
+    score += 1;
+  } else {
+    console.log("You're wrong!");
+    if (score > 0) score -= 1;
+  }
+  console.log(score);
+  currentQuestionIndex++;
+  showQuestions();
+  return score;
+}
+// calcScore(){
+//   let score = 0;
+// };
 
 // console.log(questions.answer[0]);
 
-showQuestions();
 // function displayQuestion(questionsArr) {
 //   let firstQuestion = questions[0];
 // }
@@ -212,7 +220,7 @@ function timerCountdown() {
     } else {
       // When timeleft gets to 0, set timeleftel to empty string
       timeLeftEl = "";
-      displayScore();
+      // displayScore();
       //Use clear interval to stop timer
       clearInterval(setTimer);
       //Call displayQuestions function
@@ -228,11 +236,11 @@ function checkScore(score, highScore) {
   } else highScore = highScore;
 }
 // When the game ends, it should display their score and give the user the ability to save their initials and their score
-function displayScore() {
-  //End quiz when timer reaches zero if(timeEl===0){end game; display score, let user save initials and their score}
-  let finalScore = prompt(`Your score is ${score}!\nEnter your initials here:`);
-  console.log(finalScore);
-}
+// function displayScore() {
+//   //End quiz when timer reaches zero if(timeEl===0){end game; display score, let user save initials and their score}
+//   let finalScore = prompt(`Your score is ${score}!\nEnter your initials here:`);
+//   console.log(finalScore);
+// }
 
 // function checkAnswer() {
 //   let timeLeft = timerCountdown();
