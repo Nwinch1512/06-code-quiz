@@ -21,6 +21,7 @@ let highScore = 0;
 let finalScoreSpan = document.getElementById("final-score");
 let currentQuestionIndex = 0;
 let timeLeft = 25;
+let scoresArray = [];
 
 // Set up a function that loops over questions array and prints question text out to console
 console.log(questions);
@@ -91,17 +92,8 @@ function showQuestions() {
     choicesBtn.setAttribute("index", i);
     choicesBtn.onclick = submitAnswer;
     choices.appendChild(choicesBtn);
-    console.log(correctAnswer);
   }
 }
-
-// function resetQuestions(event) {
-//   let choicesBtn = documentQuerySelectorAll("choices-button");
-//   for (let i = 0; i < question.choices.length; i++) {
-//     let text = i + 1 + ". " + question.choices[i];
-//     choicesBtn.textContent = text;
-//   }
-// }
 
 function submitAnswer(event) {
   // localStorage.getItem("choicesBtn");
@@ -153,42 +145,29 @@ function nextQuestion() {
 }
 
 function displayEndScreen() {
+  timeLeftEl = finalScore;
   questionTitle.classList.add("hide");
   questionsDiv.classList.add("hide");
   endScreen.classList.remove("hide");
+  submitInitialsBtn.addEventListener("click", submitInitials);
 }
-// let finalScore = prompt(`Your score is ${score}!\nEnter your initials here:`);
-//   console.log(finalScore);
-// }
 
-//
+function submitInitials() {
+  let finalScore = nextQuestion();
+  console.log(finalScore);
+  let initialsInput = document.getElementById("initials").value;
+  if (initialsInput === "") {
+    return;
+  }
+  console.log(initialsInput);
+}
+// scoresArray.push(intialsEntered, finalScore);
+// initialsEntered = "";
 
 // calcScore(){
 //   let score = 0;
 // };
-
-// console.log(questions.answer[0]);
-
-// function displayQuestion(questionsArr) {
-//   let firstQuestion = questions[0];
-// }
-
-// Setting up function that loads first question.  Need to figure out where to get questions
-// Questions contain buttons for each answer.
-// When answer is clicked, the next question appears
-// If the answer clicked was incorrect then subtract time from the clock
-// The quiz should end when all questions are answered or the timer reaches 0.
-function displayQuestions() {
-  //load first question.  HTML class set up to show.  Need to add class for hide.
-  // hide each question classlist.add('hide');
-  // for (let questionText of Object.keys(questionsText)) {
-  //   // let currentQuestion = questionsText.question[i];
-  //   // let { answers, correctAnswer, question } = currentQuestion;
-  //   console.log(questionText);
-}
-
 let questionCount = 0;
-
 // Uses the `setInterval()` method to call a function to be executed every 1000 milliseconds
 let questionInterval = setInterval(function () {
   // If there are no more words left in the message
@@ -228,7 +207,13 @@ function checkScore(score, highScore) {
   if (score > highScore) {
     highScore = score;
   } else highScore = highScore;
+  console.log(`The highest score is ${highScore}`);
+  return highScore;
 }
+
+let high = checkScore(12, 32);
+console.log(high);
+
 // When the game ends, it should display their score and give the user the ability to save their initials and their score
 // function displayScore() {
 //   //End quiz when timer reaches zero if(timeEl===0){end game; display score, let user save initials and their score}
