@@ -6,6 +6,7 @@
 // Bringing in HTML as variables to use in JS
 let startScreen = document.getElementById("start-screen");
 let endScreen = document.getElementById("end-screen");
+let feedbackDiv = document.getElementById("feedback");
 let startBtnEl = document.getElementById("start");
 //This is from highscores.html file
 // let highScoresEl = document.getElementById("highscores");
@@ -13,11 +14,11 @@ let timeLeftEl = document.getElementById("time");
 let questionsDiv = document.getElementById("questions");
 let questionTitle = document.getElementById("question-title");
 let choices = document.getElementById("choices");
-let score = 0;
+let score = parseInt(timeLeftEl);
 let highScore = 0;
 let finalScoreSpan = document.getElementById("final-score");
 let currentQuestionIndex = 0;
-let timeLeft = 5;
+let timeLeft = 15;
 
 // Set up a function that loops over questions array and prints question text out to console
 console.log(questions);
@@ -73,9 +74,11 @@ console.log(questions.length);
 
 function showQuestions() {
   choices.textContent = "";
+  feedbackDiv.textContent = "";
+  feedbackDiv.classList.add("hide");
   startScreen.textContent = "";
+  endScreen.classList.add("hide");
   let question = questions[currentQuestionIndex];
-  console.log(question.title);
   questionTitle.textContent = question.title;
   let correctAnswer = question.answer;
   for (let i = 0; i < question.choices.length; i++) {
@@ -103,27 +106,51 @@ function showQuestions() {
 // }
 
 function submitAnswer(event) {
-  localStorage.getItem("choicesBtn");
+  // localStorage.getItem("choicesBtn");
   let question = questions[currentQuestionIndex];
   let correctAnswer = question.answer;
   let answerIndex = event.target.getAttribute("index");
+  let feedbackText = document.createElement("p");
   console.log(answerIndex);
   let submittedAnswer = question.choices[answerIndex];
-  let score = 0;
   console.log(submittedAnswer);
   //Need to append message to div as per demo and play sound file.  Need to remove time from time element if answer wrong.
-  if (submittedAnswer == correctAnswer) {
-    console.log("You're correct!");
+  if (submittedAnswer === correctAnswer) {
+    feedbackText.textContent = "You're correct!";
+    feedbackDiv.appendChild(feedbackText);
+    feedbackDiv.classList.remove("hide");
     score += 1;
+    setTimeout(nextQuestion, 2000);
+    return;
   } else {
-    console.log("You're wrong!");
+    feedbackText.textContent = "You're wrong!";
+    feedbackDiv.appendChild(feedbackText);
+    feedbackDiv.classList.remove("hide");
     if (score > 0) score -= 1;
+    setTimeout(nextQuestion, 2000);
+    return;
   }
   console.log(score);
-  currentQuestionIndex++;
+
+  // Move user onto next question
+
   showQuestions();
-  return score;
+  return score, submittedAnswer, correctAnswer;
 }
+
+function nextQuestion() {
+  if (currentQuestionIndex < questions.length) {
+    currentQuestionIndex++;
+  } else if (currentQuestionIndex === questions.length) {
+    //Store score
+    //Allow user to input initials
+    //Display end screen
+  }
+  showQuestions();
+}
+
+//
+
 // calcScore(){
 //   let score = 0;
 // };
