@@ -4,10 +4,12 @@
 // A start button that when clicked a timer starts and the first question appears.
 
 // Bringing in HTML as variables to use in JS
+let wrapper = document.getElementById("wrapper");
 let startScreen = document.getElementById("start-screen");
 let endScreen = document.getElementById("end-screen");
 let feedbackDiv = document.getElementById("feedback");
 let startBtnEl = document.getElementById("start");
+let submitInitialsBtn = document.getElementById("submit");
 //This is from highscores.html file
 // let highScoresEl = document.getElementById("highscores");
 let timeLeftEl = document.getElementById("time");
@@ -18,7 +20,7 @@ let score = parseInt(timeLeftEl);
 let highScore = 0;
 let finalScoreSpan = document.getElementById("final-score");
 let currentQuestionIndex = 0;
-let timeLeft = 15;
+let timeLeft = 25;
 
 // Set up a function that loops over questions array and prints question text out to console
 console.log(questions);
@@ -93,10 +95,6 @@ function showQuestions() {
   }
 }
 
-// function removeBtns(event) {
-//   questions[currentQuestionIndex].splice(event.target.getAttribute("index"), 1);
-// }
-
 // function resetQuestions(event) {
 //   let choicesBtn = documentQuerySelectorAll("choices-button");
 //   for (let i = 0; i < question.choices.length; i++) {
@@ -119,35 +117,49 @@ function submitAnswer(event) {
     feedbackText.textContent = "You're correct!";
     feedbackDiv.appendChild(feedbackText);
     feedbackDiv.classList.remove("hide");
-    score += 1;
     setTimeout(nextQuestion, 2000);
     return;
   } else {
     feedbackText.textContent = "You're wrong!";
     feedbackDiv.appendChild(feedbackText);
     feedbackDiv.classList.remove("hide");
-    if (score > 0) score -= 1;
+    timeLeft > 15 ? (timeLeft = timeLeft - 15) : (timeLeft = 0);
     setTimeout(nextQuestion, 2000);
-    return;
+    return timeLeft;
   }
-  console.log(score);
 
-  // Move user onto next question
+  let finalScore = submitAnswer();
+  console.log(finalScore);
 
-  showQuestions();
-  return score, submittedAnswer, correctAnswer;
+  // // Move user onto next question
+
+  // showQuestions();
+  // return score, submittedAnswer, correctAnswer;
 }
 
 function nextQuestion() {
   if (currentQuestionIndex < questions.length) {
     currentQuestionIndex++;
-  } else if (currentQuestionIndex === questions.length) {
+  }
+  if (currentQuestionIndex === questions.length) {
+    finalScore = timeLeft;
+    displayEndScreen();
+    return finalScore;
     //Store score
     //Allow user to input initials
     //Display end screen
   }
   showQuestions();
 }
+
+function displayEndScreen() {
+  questionTitle.classList.add("hide");
+  questionsDiv.classList.add("hide");
+  endScreen.classList.remove("hide");
+}
+// let finalScore = prompt(`Your score is ${score}!\nEnter your initials here:`);
+//   console.log(finalScore);
+// }
 
 //
 
@@ -159,30 +171,6 @@ function nextQuestion() {
 
 // function displayQuestion(questionsArr) {
 //   let firstQuestion = questions[0];
-// }
-
-// let choicesEntries = Object.entries(questions);
-// for (let [key, { title, choices, answer }] of choicesEntries) {
-//   let firstChoices = questions[0];
-//   console.log(firstChoices.choices);
-//   firstChoices.choices.forEach((choice) => {
-//     console.log(choice);
-//   });
-//   console.log(`${key}:${choices}`);
-// }
-// Object.entries(questions.choices).forEach(([key, value]) => {
-//   console.log(key, value);
-// });
-
-// let questionIndex = 0;
-// let questionsEntries = Object.entries(questions);
-// for (let [key, { title, choices, answer }] of questionsEntries) {
-//   // console.log(`${key}:${title}`);
-//   let keyAsInt = parseInt(key);
-//   console.log(keyAsInt);
-//   if (keyAsInt === questionIndex) {
-//     console.log(`${keyAsInt + 1}: ${title}`);
-//   }
 // }
 
 // Setting up function that loads first question.  Need to figure out where to get questions
@@ -199,20 +187,6 @@ function displayQuestions() {
   //   console.log(questionText);
 }
 
-// for (i = 0; i < questionsText.length; i++) {
-//   let currentQuestion = questionsText.question[i];
-//   let currentOptions = questionsText.answers[i];
-//   let btnEl = document.createElement("button");
-//   btnEl.dataset.index = i;
-//   currentOptions.appendChild(btnEl);
-//   choices.appendChild(currentOptions);
-//   // btnEl.textContent = `${i + 1}${currentQuestion}`;
-// }
-//let currentQuestion = questions[i];
-// classlist.add('show') for question in array based on array index
-//Set up buttons for each choice - looks like there are 4 choices for each question. Need to append buttons to heading.
-//Add eventlistener to choice which takes the user to the next question.
-//Take away time from timeLeftEl each time answer incorrect
 let questionCount = 0;
 
 // Uses the `setInterval()` method to call a function to be executed every 1000 milliseconds
@@ -258,14 +232,6 @@ function checkScore(score, highScore) {
 // When the game ends, it should display their score and give the user the ability to save their initials and their score
 // function displayScore() {
 //   //End quiz when timer reaches zero if(timeEl===0){end game; display score, let user save initials and their score}
-
-// if ((currentQuestionIndex = currentQuestionIndex.length)) {
-//   endScreen.classList.remove("hide");
-//   let initialInput = document.createElement("input");
-// }
-//   let finalScore = prompt(`Your score is ${score}!\nEnter your initials here:`);
-//   console.log(finalScore);
-// }
 
 // function checkAnswer() {
 //   let timeLeft = timerCountdown();
