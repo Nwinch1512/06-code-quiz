@@ -22,6 +22,7 @@ let finalScoreSpan = document.getElementById("final-score");
 let currentQuestionIndex = 0;
 let timeLeft = 25;
 let scoresArray = [];
+let finalScore = 0;
 
 // Set up a function that loops over questions array and prints question text out to console
 console.log(questions);
@@ -120,9 +121,6 @@ function submitAnswer(event) {
     return timeLeft;
   }
 
-  let finalScore = submitAnswer();
-  console.log(finalScore);
-
   // // Move user onto next question
 
   // showQuestions();
@@ -146,14 +144,15 @@ function nextQuestion() {
 
 function displayEndScreen() {
   timeLeftEl = finalScore;
+  finalScoreSpan.textContent = finalScore;
   questionTitle.classList.add("hide");
   questionsDiv.classList.add("hide");
   endScreen.classList.remove("hide");
   submitInitialsBtn.addEventListener("click", submitInitials);
+  return finalScore;
 }
 
 function submitInitials() {
-  let finalScore = nextQuestion();
   console.log(finalScore);
   let initialsInput = document.getElementById("initials").value;
   if (initialsInput === "") {
