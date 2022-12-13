@@ -106,25 +106,26 @@ function displayEndScreen() {
 }
 
 submitInitialsBtn.addEventListener("click", submitInitials);
-let userObject = {};
-let scoresArray = [];
 
 function submitInitials() {
   let initialsInput = document.getElementById("initials").value;
-  scoresArray.push({ initialsInput, finalScore });
-  console.log(scoresArray);
+  // let storedScoresArray = getHighScores();
+  // storedScoresArray.push({ initialsInput, finalScore });
+
+  //console.log(storedScoresArray);
   // userObject.user = initialsInput;
   // userObject.score = finalScore;
   // console.log(userObject);
   // scoresArray.push(userObject);
   // console.log(scoresArray);
-  // addScore(userObject.user, userObject.score);
-  initialsInput.value = "";
-  localStorage.setItem("scoresArray", JSON.stringify(scoresArray));
-  console.log(initialsInput, finalScore);
-  if (initialsInput !== "") {
+  //initialsInput.value = "";
+  //localStorage.setItem("scoresArrayKey", JSON.stringify(storedScoresArray));
+  //console.log(initialsInput, finalScore);
+  if (initialsInput === "") {
     return;
   } else {
+    addHighScore(initialsInput, finalScore);
+    moveToHighScoresPage();
     //localStorage.setItem("initialsInput", JSON.stringify(initialsInput));
     // let storeHighScores = JSON.parse(localStorage.getItem("finalScore"));
     //storeHighScores();
@@ -143,7 +144,7 @@ function addScore() {
   scoresArray.push({ initialsInput, finalScore });
   console.log(scoresArray);
 }
-console.log(scoresArray);
+
 // function addScore(input, score) {
 //   scoresArray.push(intialsEntered, finalScore);
 //   console.log(scoresArray);

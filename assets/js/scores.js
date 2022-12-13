@@ -12,31 +12,38 @@ let clearBtn = document.getElementById("clear");
 
 function getHighScores() {
   //retrieve highScores from local storage
-  let storedScoresArray = JSON.parse(localStorage.getItem("scoresArray"));
+  let storedScoresArray = JSON.parse(localStorage.getItem("scoresArrayKey"));
   //if highScores is undefined, return empty array
-  if (scoresArray === undefined) {
-    return (highScores = []);
+  if (storedScoresArray) {
+    return storedScoresArray;
   }
   //else return highScores
   else {
-    return scoresArray;
+    return [];
   }
 }
 
 function addHighScore(initials, score) {
-  //get current highScores (call above method)
-  getHighScores();
+  //get current high score list from local storage by calling above method
+  let storedScoresArray = getHighScores();
   //push new score object (like the question object) onto array
+  storedScoresArray.push({ initials, score });
   //store new highScores array in local storage
+  localStorage.setItem("scoresArrayKey", JSON.stringify(storedScoresArray));
 }
 
 function displayHighScores() {
   //get current highScores (call above method)
+  let highScores = getHighScores();
+  //loop and display
+  for (let i = 0; i < highScores.length; i++) {
+    let curHighScore = highScores[i];
+    console.log(curHighScore);
+  }
 }
 
 function clearHighScores(event) {
-  //This is only needed if the button click would perform an action e.g. submit a form
-  event.preventDefault();
+  localStorage.removeItem("scoresArrayKey");
   highscoresOlEl.textContent = "";
 }
 
