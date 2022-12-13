@@ -21,7 +21,7 @@ let highScore = 0;
 let finalScoreSpan = document.getElementById("final-score");
 let currentQuestionIndex = 0;
 let timeLeft = 75;
-let scoresArray = [];
+
 let finalScore = 0;
 
 // Set up a function that loops over questions array and prints question text out to console
@@ -106,31 +106,48 @@ function displayEndScreen() {
 }
 
 submitInitialsBtn.addEventListener("click", submitInitials);
+let userObject = {};
+let scoresArray = [];
 
 function submitInitials() {
   let initialsInput = document.getElementById("initials").value;
-  localStorage.setItem("finalScore", JSON.stringify(finalScore));
-  console.log(finalScore);
+  scoresArray.push({ initialsInput, finalScore });
+  console.log(scoresArray);
+  // userObject.user = initialsInput;
+  // userObject.score = finalScore;
+  // console.log(userObject);
+  // scoresArray.push(userObject);
+  // console.log(scoresArray);
+  // addScore(userObject.user, userObject.score);
+  initialsInput.value = "";
+  localStorage.setItem("scoresArray", JSON.stringify(scoresArray));
+
   if (initialsInput !== "") {
+    return;
+  } else {
     //localStorage.setItem("initialsInput", JSON.stringify(initialsInput));
     // let storeHighScores = JSON.parse(localStorage.getItem("finalScore"));
     //storeHighScores();
     //console.log(initialsInput);
     //This calls the function (that needs completing) that will add the initials and score as an object to a high scores array then save that to local storage
-    addHighScore(initialsInput, finalScore);
+    // addScore(initialsInput, finalScore);
   }
-  moveToHighScoresPage();
+  // moveToHighScoresPage();
 }
 
 function moveToHighScoresPage() {
   window.location.href = "highscores.html";
 }
 
-function addHighScore(input, score) {
-  let scoresArray = [];
-  scoresArray.push(intialsEntered, finalScore);
+function addScore() {
+  scoresArray.push({ initialsInput, finalScore });
   console.log(scoresArray);
 }
+console.log(scoresArray);
+// function addScore(input, score) {
+//   scoresArray.push(intialsEntered, finalScore);
+//   console.log(scoresArray);
+// }
 
 //After button clicked:
 

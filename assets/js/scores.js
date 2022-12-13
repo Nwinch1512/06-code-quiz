@@ -12,12 +12,20 @@ let clearBtn = document.getElementById("clear");
 
 function getHighScores() {
   //retrieve highScores from local storage
+  let storedScoresArray = JSON.parse(localStorage.getItem("scoresArray"));
   //if highScores is undefined, return empty array
+  if (scoresArray === undefined) {
+    return (highScores = []);
+  }
   //else return highScores
+  else {
+    return scoresArray;
+  }
 }
 
 function addHighScore(initials, score) {
   //get current highScores (call above method)
+  getHighScores();
   //push new score object (like the question object) onto array
   //store new highScores array in local storage
 }
