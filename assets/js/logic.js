@@ -29,9 +29,11 @@ console.log(questions);
 console.log(questions.length);
 let text;
 startBtnEl.addEventListener("click", startQuiz);
-document
-  .getElementById("skip-to-end")
-  .addEventListener("click", displayEndScreen);
+
+//Event listener added to test end screen and scores screen
+// document
+//   .getElementById("skip-to-end")
+//   .addEventListener("click", displayEndScreen);
 
 function startQuiz() {
   timerCountdown();
@@ -109,31 +111,13 @@ submitInitialsBtn.addEventListener("click", submitInitials);
 
 function submitInitials() {
   let initialsInput = document.getElementById("initials").value;
-  // let storedScoresArray = getHighScores();
-  // storedScoresArray.push({ initialsInput, finalScore });
 
-  //console.log(storedScoresArray);
-  // userObject.user = initialsInput;
-  // userObject.score = finalScore;
-  // console.log(userObject);
-  // scoresArray.push(userObject);
-  // console.log(scoresArray);
-  //initialsInput.value = "";
-  //localStorage.setItem("scoresArrayKey", JSON.stringify(storedScoresArray));
-  //console.log(initialsInput, finalScore);
   if (initialsInput === "") {
     return;
   } else {
     addHighScore(initialsInput, finalScore);
     moveToHighScoresPage();
-    //localStorage.setItem("initialsInput", JSON.stringify(initialsInput));
-    // let storeHighScores = JSON.parse(localStorage.getItem("finalScore"));
-    //storeHighScores();
-    //console.log(initialsInput);
-    //This calls the function (that needs completing) that will add the initials and score as an object to a high scores array then save that to local storage
-    // addScore(initialsInput, finalScore);
   }
-  // moveToHighScoresPage();
 }
 
 function moveToHighScoresPage() {
@@ -145,33 +129,17 @@ function addScore() {
   console.log(scoresArray);
 }
 
-// function addScore(input, score) {
-//   scoresArray.push(intialsEntered, finalScore);
-//   console.log(scoresArray);
+//function to check high score - not being used at moment
+// function checkScore(score, highScore) {
+//   if (score > highScore) {
+//     highScore = score;
+//   } else highScore = highScore;
+//   console.log(`The highest score is ${highScore}`);
+//   return highScore;
 // }
 
-//After button clicked:
-
-//1. store initials and score
-//2. link to HTML
-// scoresArray.push(intialsEntered, finalScore);
-// initialsEntered = "";
-
-//function to check high score
-function checkScore(score, highScore) {
-  if (score > highScore) {
-    highScore = score;
-  } else highScore = highScore;
-  console.log(`The highest score is ${highScore}`);
-  return highScore;
-}
-
-let high = checkScore(12, 32);
-console.log(high);
-
-// calcScore(){
-//   let score = 0;
-// };
+// let high = checkScore(12, 32);
+// console.log(high);
 
 let setTimer;
 
@@ -193,23 +161,3 @@ function timerCountdown() {
 function stopCountdown() {
   clearInterval(setTimer);
 }
-
-// When the game ends, it should display their score and give the user the ability to save their initials and their score
-// function displayScore() {
-//   //End quiz when timer reaches zero if(timeEl===0){end game; display score, let user save initials and their score}
-
-// function checkAnswer() {
-//   let timeLeft = timerCountdown();
-//   if (answer === true) {
-//     score = score + 1;
-//   } else {
-//     score = score - 1;
-//     timeLeft = timeLeft - 20;
-//   }
-// }
-
-// function displayScore() {}
-
-// NW. Need to develop high scores section.  Maybe use document.create to create li elements under ol.  Use append child method to append to ol.  Look back at append child activities from week 6 class 1.  Use el.textContent to set value for each score element within loop.  Set up as node list for all high score elements.  Then loop over node list and populate high scores based on min max if logic.  e.g.
-// let currScore = 0; let maxScore = 0; (if currScore > maxScore) {maxScore = currScore}
-// el.textContent = maxScore;

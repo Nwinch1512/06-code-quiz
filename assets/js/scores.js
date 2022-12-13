@@ -38,11 +38,16 @@ function displayHighScores() {
   //loop and display
   for (let i = 0; i < highScores.length; i++) {
     let curHighScore = highScores[i];
-    console.log(curHighScore);
+
+    let li = document.createElement("li");
+    li.textContent = `${curHighScore.initials.toUpperCase().trim()} - ${
+      curHighScore.score
+    }`;
+    highscoresOlEl.appendChild(li);
   }
 }
 
-function clearHighScores(event) {
+function clearHighScores() {
   localStorage.removeItem("scoresArrayKey");
   highscoresOlEl.textContent = "";
 }
