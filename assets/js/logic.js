@@ -121,7 +121,7 @@ function submitInitials() {
   // addScore(userObject.user, userObject.score);
   initialsInput.value = "";
   localStorage.setItem("scoresArray", JSON.stringify(scoresArray));
-
+  console.log(initialsInput, finalScore);
   if (initialsInput !== "") {
     return;
   } else {
