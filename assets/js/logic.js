@@ -119,7 +119,11 @@ function submitInitials() {
     //This calls the function (that needs completing) that will add the initials and score as an object to a high scores array then save that to local storage
     addHighScore(initialsInput, finalScore);
   }
-  console.log(initialsInput, finalScore);
+  moveToHighScoresPage();
+}
+
+function moveToHighScoresPage() {
+  window.location.href = "highscores.html";
 }
 
 function addHighScore(input, score) {
