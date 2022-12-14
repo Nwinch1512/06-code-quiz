@@ -35,6 +35,10 @@ function addHighScore(initials, score) {
 function displayHighScores() {
   //get current highScores (call above method)
   let highScores = getHighScores();
+  console.log(highScores);
+  highScores.sort(function (a, b) {
+    return b.score - a.score;
+  });
   //loop and display
   for (let i = 0; i < highScores.length; i++) {
     let curHighScore = highScores[i];
