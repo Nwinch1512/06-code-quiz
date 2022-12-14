@@ -28,15 +28,15 @@ let sfxRight = new Audio("./assets/sfx/correct.wav");
 let sfxWrong = new Audio("./assets/sfx/incorrect.wav");
 
 // Set up a function that loops over questions array and prints question text out to console
-console.log(questions);
-console.log(questions.length);
-let text;
+
 startBtnEl.addEventListener("click", startQuiz);
 
 //Event listener added to test end screen and scores screen
 // document
 //   .getElementById("skip-to-end")
 //   .addEventListener("click", displayEndScreen);
+
+let text;
 
 function startQuiz() {
   timerCountdown();
@@ -75,7 +75,6 @@ function submitAnswer(event) {
   let answerIndex = event.target.getAttribute("index");
   let feedbackText = document.createElement("p");
   let submittedAnswer = question.choices[answerIndex];
-  //Need to append message to div as per demo and play sound file.  Need to remove time from time element if answer wrong.
   if (submittedAnswer === correctAnswer) {
     feedbackText.textContent = "You're correct!";
     sfxRight.play();
@@ -140,7 +139,7 @@ function timerCountdown() {
       //Decrement timeleft down
       timeLeft--;
     } else {
-      clearInterval(setTimer);
+      displayEndScreen();
     }
     timeLeftEl.textContent = timeLeft;
   }, 1000);
