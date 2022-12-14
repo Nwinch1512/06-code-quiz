@@ -80,14 +80,14 @@ function submitAnswer(event) {
     sfxRight.play();
     feedbackDiv.appendChild(feedbackText);
     feedbackDiv.classList.remove("hide");
-    setTimeout(nextQuestion, 2000);
+    setTimeout(nextQuestion, 1000);
   } else {
     feedbackText.textContent = "You're wrong!";
     sfxWrong.play();
     feedbackDiv.appendChild(feedbackText);
     feedbackDiv.classList.remove("hide");
     timeLeft > 15 ? (timeLeft = timeLeft - 15) : (timeLeft = 0);
-    setTimeout(nextQuestion, 2000);
+    setTimeout(nextQuestion, 1000);
   }
 }
 
