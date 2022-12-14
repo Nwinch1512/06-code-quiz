@@ -35,7 +35,6 @@ function addHighScore(initials, score) {
 function displayHighScores() {
   //get current highScores (call above method)
   let highScores = getHighScores();
-  console.log(highScores);
   highScores.sort(function (a, b) {
     return b.score - a.score;
   });

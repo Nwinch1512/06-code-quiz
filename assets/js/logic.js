@@ -124,23 +124,6 @@ function moveToHighScoresPage() {
   window.location.href = "highscores.html";
 }
 
-function addScore() {
-  scoresArray.push({ initialsInput, finalScore });
-  console.log(scoresArray);
-}
-
-//function to check high score - not being used at moment
-// function checkScore(score, highScore) {
-//   if (score > highScore) {
-//     highScore = score;
-//   } else highScore = highScore;
-//   console.log(`The highest score is ${highScore}`);
-//   return highScore;
-// }
-
-// let high = checkScore(12, 32);
-// console.log(high);
-
 let setTimer;
 
 function timerCountdown() {
